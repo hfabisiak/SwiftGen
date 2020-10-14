@@ -34,6 +34,14 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - 
+        name: Cache SPM
+        uses: actions/Cache@v2
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
       -
         name: Verify installation
         run: bundle exec rake cli:install[./standalone,./standalone/frameworks,./standalone/stencils]
@@ -60,6 +68,14 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - 
+        name: Cache SPM
+        uses: actions/Cache@v2
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
       -
         name: Create zip
         run: bundle exec rake release:zip
